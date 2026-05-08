@@ -1,0 +1,13 @@
+streamlit>=1.32.0
+google-api-python-client>=2.100.0
+pandas>=2.0.0
+numpy>=1.24.0
+plotly>=5.18.0
+matplotlib>=3.8.0
+wordcloud>=1.9.3
+jieba>=0.42.1
+youtube-transcript-api>=0.6.1
+yt-dlp>=2026.3.17
+fpdf2>=2.7.6
+kaleido>=0.2.1
+Pillow>=10.0.0
