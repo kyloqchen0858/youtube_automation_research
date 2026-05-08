@@ -28,6 +28,14 @@ THEME_WHITELIST = {
 }
 
 
+def _normalize_output_language(output_language: str | None) -> str:
+    return "en" if str(output_language or "").lower().startswith("en") else "zh"
+
+
+def _t(output_language: str | None, zh: str, en: str) -> str:
+    return en if _normalize_output_language(output_language) == "en" else zh
+
+
 @dataclass
 class PlanItem:
     week: int
@@ -45,6 +53,7 @@ def generate_executable_cold_start_plan(
     niche: str,
     user_keywords: list[str] | None = None,
     count: int = 12,
+    output_language: str = "zh",
 ) -> dict:
     """
     生成冷启动可执行内容计划与测试矩阵。
@@ -59,27 +68,28 @@ def generate_executable_cold_start_plan(
     keywords = _collect_seed_keywords(channels_data, user_keywords)
     if not keywords:
         keywords = _fallback_keywords(niche)
+    translate = lambda zh, en: _t(output_language, zh, en)
 
     topic_templates = [
-        "{kw}：最值得先搭好的实战工作流",
-        "别再低效使用 {kw}：一个可复制的执行版本",
-        "7 天上手 {kw}：从混乱到稳定输出",
-        "我把 {kw} 放进真实流程里测试，结果如何？",
-        "你缺的不是时间，是系统：{kw} 拆解",
-        "低门槛也能落地：{kw} 的最小可执行版本",
+        translate("{kw}：最值得先搭好的实战工作流", "{kw}: the most practical workflow to build first"),
+        translate("别再低效使用 {kw}：一个可复制的执行版本", "Stop using {kw} inefficiently: a repeatable execution version"),
+        translate("7 天上手 {kw}：从混乱到稳定输出", "Learn {kw} in 7 days: from chaos to steady output"),
+        translate("我把 {kw} 放进真实流程里测试，结果如何？", "I tested {kw} inside a real workflow. What happened?"),
+        translate("你缺的不是时间，是系统：{kw} 拆解", "You do not lack time. You lack a system: breaking down {kw}"),
+        translate("低门槛也能落地：{kw} 的最小可执行版本", "Low-friction and usable: the minimum viable version of {kw}"),
     ]
 
     angle_templates = [
-        "痛点切入 + 真实案例 + 当日可执行动作",
-        "反常识观点 + 3 步行动框架",
-        "前后对比 + 模板拆解",
-        "误区纠正 + 低门槛执行清单",
+        translate("痛点切入 + 真实案例 + 当日可执行动作", "Pain point entry + real case + action usable today"),
+        translate("反常识观点 + 3 步行动框架", "Contrarian angle + 3-step action frame"),
+        translate("前后对比 + 模板拆解", "Before/after contrast + template teardown"),
+        translate("误区纠正 + 低门槛执行清单", "Misconception correction + low-friction execution checklist"),
     ]
 
     cta_templates = [
-        "评论区回复“workflow”，领取一页执行清单",
-        "下一期投票选择你最想拆解的任务场景",
-        "下载免费模板：流程图 / 提示词 / 操作清单",
+        translate("评论区回复“workflow”，领取一页执行清单", "Reply \"workflow\" in the comments to get a one-page execution checklist"),
+        translate("下一期投票选择你最想拆解的任务场景", "Vote on the next task scenario you want broken down"),
+        translate("下载免费模板：流程图 / 提示词 / 操作清单", "Download the free template: flowchart / prompts / operating checklist"),
     ]
 
     weekly_plan: list[dict] = []
@@ -96,12 +106,21 @@ def generate_executable_cold_start_plan(
             difficulty = "easy" if idx < 4 else ("medium" if idx < 9 else "hard")
             target_duration = "5-8m" if difficulty == "easy" else ("8-12m" if difficulty == "medium" else "10-15m")
 
-            script_outline = (
-                "Hook 10s（指出具体任务或低效场景） -> "
-                "Context 30s（为什么现在的方法低效） -> "
-                "Workflow 3 steps（拆成可复制动作） -> "
-                "Demo 60s（展示结果前后对比） -> "
-                "CTA 15s"
+            script_outline = translate(
+                (
+                    "Hook 10s（指出具体任务或低效场景） -> "
+                    "Context 30s（为什么现在的方法低效） -> "
+                    "Workflow 3 steps（拆成可复制动作） -> "
+                    "Demo 60s（展示结果前后对比） -> "
+                    "CTA 15s"
+                ),
+                (
+                    "Hook 10s (state the concrete task or inefficient scenario) -> "
+                    "Context 30s (why the current method underperforms) -> "
+                    "Workflow 3 steps (break into repeatable actions) -> "
+                    "Demo 60s (show the before/after result) -> "
+                    "CTA 15s"
+                ),
             )
 
             item = PlanItem(
@@ -117,14 +136,14 @@ def generate_executable_cold_start_plan(
             weekly_plan.append(_to_dict(item))
             idx += 1
 
-    experiment_matrix = _build_experiment_matrix(keywords)
+    experiment_matrix = _build_experiment_matrix(keywords, output_language)
 
     setup_checklist = [
-        f"确定频道一句话定位（围绕 {niche or '核心赛道'} 的明确承诺）",
-        "准备统一缩略图模板（高对比底色 + 3-5 词标题）",
-        "准备固定片头钩子句（10 秒内）",
-        "建立选题看板：主题/标题/脚本/发布时间/结果",
-        "设置每周复盘：CTR、平均观看时长、评论关键词",
+        translate(f"确定频道一句话定位（围绕 {niche or '核心赛道'} 的明确承诺）", f"Define a one-line channel promise around {niche or 'the core niche'}"),
+        translate("准备统一缩略图模板（高对比底色 + 3-5 词标题）", "Prepare one thumbnail template system (high-contrast background + 3-5 word promise)"),
+        translate("准备固定片头钩子句（10 秒内）", "Prepare a reusable opening hook line within the first 10 seconds"),
+        translate("建立选题看板：主题/标题/脚本/发布时间/结果", "Build a topic board: topic / title / script / publish time / result"),
+        translate("设置每周复盘：CTR、平均观看时长、评论关键词", "Set up a weekly review around CTR, average view duration, and comment keywords"),
     ]
 
     return {
@@ -238,15 +257,16 @@ def _fallback_keywords(niche: str) -> list[str]:
     return ["workflow", "automation", "tutorial", "creator", "research"]
 
 
-def _build_experiment_matrix(keywords: list[str]) -> list[dict]:
+def _build_experiment_matrix(keywords: list[str], output_language: str = "zh") -> list[dict]:
     """
     生成格式 x 题材 x hook 的小步快跑测试矩阵。
     """
+    translate = lambda zh, en: _t(output_language, zh, en)
     formats = ["story", "how-to", "checklist"]
     hooks = [
-        "你缺的不是工具，而是正确流程",
-        "这个工作流今天就能复制",
-        "90 秒讲清这 3 步怎么落地",
+        translate("你缺的不是工具，而是正确流程", "You do not need more tools. You need the right workflow"),
+        translate("这个工作流今天就能复制", "This workflow can be copied today"),
+        translate("90 秒讲清这 3 步怎么落地", "Explain how to apply these 3 steps in 90 seconds"),
     ]
 
     matrix = []
@@ -258,7 +278,7 @@ def _build_experiment_matrix(keywords: list[str]) -> list[dict]:
                 "format": formats[idx % len(formats)],
                 "hook": hooks[idx % len(hooks)],
                 "success_metric": "CTR >= 5% and avg view duration >= 35%",
-                "decision_rule": "连续 2 个视频达标则放大该组合，否则替换 hook",
+                "decision_rule": translate("连续 2 个视频达标则放大该组合，否则替换 hook", "If 2 videos in a row hit the target, scale this combo; otherwise replace the hook"),
             }
         )
     return matrix

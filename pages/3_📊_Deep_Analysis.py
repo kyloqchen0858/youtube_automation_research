@@ -601,6 +601,7 @@ if st.button("🚀 Start Deep Analysis", type="primary", use_container_width=Tru
                 avg_views_per_video=avg_views,
                 niche_cpm=6.0,
                 videos_per_month=8,
+                output_language=strategy_brief.output_language,
             )
             content_strategy = suggest_content_strategy(
                 top_engagement,
@@ -655,6 +656,7 @@ if st.button("🚀 Start Deep Analysis", type="primary", use_container_width=Tru
                     viral_outliers=viral_outliers,
                     evolution_insights=channel_evolution,
                     transcript_insights=transcript_insights,
+                    output_language=strategy_brief.output_language,
                 )
                 st.session_state.report_bytes = report_bytes
                 st.write("  ✅ PDF report generated")

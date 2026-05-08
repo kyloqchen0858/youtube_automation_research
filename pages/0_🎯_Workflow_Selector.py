@@ -19,7 +19,8 @@ st.title("🎯 Workflow Selector / 工作流选择")
 st.markdown("### 选择你的分析目标、交付模式与输出语言")
 st.warning(
     "Current status: workflow settings, content direction, and primary goal now feed competitor ranking, "
-    "candidate sampling, and downstream strategy source selection. Output language and delivery mode are still only partially wired."
+    "candidate sampling, and downstream strategy source selection. Output language now drives app-side strategy text, report preview, and PDF export. "
+    "Internal CLI AI-written analyses are still Chinese-first."
 )
 
 mode_options = {

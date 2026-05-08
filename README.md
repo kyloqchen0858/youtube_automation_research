@@ -26,6 +26,8 @@ Keep only the latest validated report set plus the canonical CSV exports needed 
 
 ## Configuration
 
+If you want a practical explanation of how Python, `py`, PATH, and project virtual environments fit together on this Windows machine, see [WINDOWS_PYTHON_ENV_GUIDE.md](WINDOWS_PYTHON_ENV_GUIDE.md) or the Chinese version [WINDOWS_PYTHON_ENV_GUIDE_ZH.md](WINDOWS_PYTHON_ENV_GUIDE_ZH.md).
+
 The Streamlit app does not need a local secrets file for normal use. Users enter their YouTube API key in the UI and it stays in the browser session.
 
 The internal CLI baseline expects environment variables from the shell or deployment platform. `.env.example` is a template only; this repository does not auto-load `.env` files.
@@ -53,6 +55,8 @@ Optional overrides for the internal baseline:
 - **🔍 Channel Discovery**: Keyword-based competitor discovery with recent-growth checks
 - **📊 Deep Analysis**: Channel/video comparison, transcript-assisted pattern extraction, and charts
 - **📥 Report Export**: Downloadable PDF plus raw CSV and transcript exports
+
+For the Streamlit app, report preview and PDF export now follow the workflow output-language selection. The default remains Chinese. Internal CLI AI-written analyses are still Chinese-first.
 
 ## Quick Start
 
