@@ -58,9 +58,9 @@ with insights_col1:
     for k, v in metrics.items():
         st.markdown(f"- **{k}**: {v}")
 
-    st.markdown(f"**⏱️ Best Duration**: {dur.get('best_range', 'N/A')}")
-    st.markdown(f"**📅 Best Publish Day**: {pub.get('best_day', 'N/A')}")
-    st.markdown(f"**🕐 Best Publish Hour**: {pub.get('best_hour', 'N/A')}:00 UTC")
+    st.markdown(f"**⏱️ Observed Stronger Duration Range**: {dur.get('best_range', 'N/A')}")
+    st.markdown(f"**📅 Common Publish Day In Sample**: {pub.get('best_day', 'N/A')}")
+    st.markdown(f"**🕐 Common Publish Hour In Sample**: {pub.get('best_hour', 'N/A')}:00 UTC")
 
     if transcript_insights.get("has_data"):
         top_hook = transcript_insights.get("hook_patterns", [])
@@ -210,14 +210,14 @@ The PDF report contains 8 chapters:
 | 2. Channel Analysis | Competitor comparison table + radar chart |
 | 3. Viral Content | TOP 10 videos, engagement leaders, duration analysis |
 | 4. Transcript Intelligence & Strategy | Hook patterns, structure patterns, reusable script templates |
-| 5. Rising Channels | Channels with explosive growth |
+| 5. Rising Channels | Channels with stronger recent movement in the sample |
 | 6. Audience Pain Points | Comment keyword analysis |
-| 7. Growth Plan & Revenue | 0→1000 subscriber roadmap + revenue projection |
-| 8. Action Checklist | Step-by-step execution guide |
+| 7. Growth Plan & Revenue | Early growth notes + scenario-based revenue range |
+| 8. Action Checklist | Prioritized execution checklist |
 """)
 
 st.markdown("---")
-st.caption("💡 Tip: Re-run the analysis with different channels or keywords anytime.")
+st.caption("💡 Tip: Re-run with a different channel set or keyword set when you want a comparison, not a guaranteed answer.")
 
 if monitor:
     st.markdown("### 🧪 Workflow Monitor")

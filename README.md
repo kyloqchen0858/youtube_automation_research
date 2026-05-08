@@ -30,6 +30,13 @@ The Streamlit app does not need a local secrets file for normal use. Users enter
 
 The internal CLI baseline expects environment variables from the shell or deployment platform. `.env.example` is a template only; this repository does not auto-load `.env` files.
 
+This public repository is kept free of runtime credentials:
+
+- no committed YouTube API key
+- no committed DeepSeek API key
+- no committed cookie files
+- local `.env` files and `.streamlit/secrets.toml` are ignored
+
 Required for `internal/cli/run_pipeline_v5.py`:
 
 - `YOUTUBE_API_KEY`
@@ -42,10 +49,10 @@ Optional overrides for the internal baseline:
 
 ## Features
 
-- **🔑 API Setup**: Step-by-step guide to get YouTube API key, niche keyword configuration
-- **🔍 Channel Discovery**: Auto-discover competitor channels by keywords, detect rising channels
-- **📊 Deep Analysis**: 8-step automated pipeline with real-time progress, interactive charts
-- **📥 PDF Report**: Downloadable 8-chapter report with charts, revenue projections, action plan
+- **🔑 API Setup**: Step-by-step API key setup and niche configuration
+- **🔍 Channel Discovery**: Keyword-based competitor discovery with recent-growth checks
+- **📊 Deep Analysis**: Channel/video comparison, transcript-assisted pattern extraction, and charts
+- **📥 Report Export**: Downloadable PDF plus raw CSV and transcript exports
 
 ## Quick Start
 
@@ -81,6 +88,13 @@ python internal/cli/run_pipeline_v5.py
 2. **🔍 Channel Discovery**: Search → view results → select channels for analysis
 3. **📊 Deep Analysis**: Click "Start" → watch 8-step progress → explore interactive dashboard
 4. **📥 Download**: Download PDF report + raw CSV data
+
+## Limits
+
+- Growth signals are comparative, not predictive.
+- Transcript coverage depends on what YouTube exposes and can be partial.
+- Publish timing summaries describe the observed sample and should not be treated as guaranteed winning slots.
+- Revenue numbers are rough scenarios, not commitments or forecasts.
 
 ## Getting a YouTube API Key
 

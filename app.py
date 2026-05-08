@@ -114,7 +114,7 @@ st.markdown("""
 | **🔑 API Setup** | Connect your YouTube API key and configure your niche |
 | **🔍 Channel Discovery** | Find competitor channels by keywords + detect rising channels |
 | **📊 Deep Analysis** | Analyze videos, engagement, content patterns, growth trends |
-| **📥 Download Report** | Generate a comprehensive PDF report with actionable insights |
+| **📥 Download Report** | Export a report package with summary findings and raw data |
 
 ---
 """)
@@ -131,15 +131,15 @@ with col1:
 with col2:
     st.markdown("#### 📈 Growth Detection")
     st.markdown(
-        "Identify channels with explosive recent growth using our "
-        "view velocity algorithm — no historical data needed."
+        "Flag channels with stronger recent movement using the same "
+        "comparison rules applied across the selected sample."
     )
 
 with col3:
-    st.markdown("#### 💰 Monetization Plan")
+    st.markdown("#### 🧭 Planning Notes")
     st.markdown(
-        "Get a 0→1000 subscriber roadmap with revenue projections "
-        "for AdSense, courses, membership, and affiliates."
+        "Review working assumptions for early growth, packaging, and "
+        "possible revenue paths without treating them as guarantees."
     )
 
 st.markdown("---")
@@ -149,6 +149,8 @@ st.markdown("""
 >
 > **🔧 First time?** Start with the **🔑 API Setup** page to connect your YouTube API key.
 > Need help getting an API key? The setup page includes a step-by-step tutorial.
+>
+> **🔒 API key handling**: The app stores your key in the current browser session only. The public repository does not ship with committed API keys.
 >
 > **🚪 One entry only**: If you want a report as a user, stay inside this app flow. The CLI pipeline is kept under `internal/cli/` for internal baselines only.
 """)

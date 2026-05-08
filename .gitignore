@@ -1,4 +1,7 @@
 .env
+.env.local
+.env.*
+!.env.example
 __pycache__/
 *.pyc
 output/
@@ -9,3 +12,5 @@ dist/
 build/
 .DS_Store
 Thumbs.db
+.streamlit/secrets.toml
+
